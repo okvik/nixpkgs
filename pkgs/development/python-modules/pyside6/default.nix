@@ -115,10 +115,15 @@ stdenv.mkDerivation (finalAttrs: {
 
   dontWrapQtApps = true;
 
-  postInstall = ''
+  buildPhase = ''
     cd ../../..
-    ${python.pythonOnBuildForHost.interpreter} setup.py egg_info --build-type=pyside6
-    cp -r PySide6.egg-info $out/${python.sitePackages}/
+    ${python.pythonOnBuildForHost.interpreter} setup.py build --build-type=pyside6
+  '';
+
+  postInstall = ''
+    # cd ../../..
+    # ${python.pythonOnBuildForHost.interpreter} setup.py egg_info --build-type=pyside6
+    # cp -r PySide6.egg-info $out/${python.sitePackages}/
   '';
 
   pythonImportsCheck = [ "PySide6" ];
