@@ -1,0 +1,13 @@
+diff --git a/tecmake.mak b/tecmake.mak
+index 48991a4..4e83787 100755
+--- a/tecmake.mak
++++ b/tecmake.mak
+@@ -1823,7 +1823,7 @@ depend: $(DEPEND)
+ $(DEPEND): $(MAKENAME) $(DEPENDDIR)
+   ifdef SRC
+ 	  @echo "" > $(DEPEND)
+-	  @which $(CPPC) 2> /dev/null 1>&2 ;\
++	  @true ;\
+ 	  if [ $$? -eq 0 ]; then \
+ 	    echo "Tecmake: Building Dependencies ... [ $(DEPEND) ] (can be slow)" ;\
+ 	    $(CPPC) $(DEPFLAGS) $(DEPINCS) $(STDINCS) $(PKGINCS) $(DEFINES) $(STDDEFS) -MM $(SOURCES) | \
