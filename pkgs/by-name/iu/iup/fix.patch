@@ -1,0 +1,36 @@
+diff --git a/Makefile b/Makefile
+index 7863492..9b0c608 100755
+--- a/Makefile
++++ b/Makefile
+@@ -2,7 +2,7 @@ ifeq ($(OS), Windows_NT)
+   WINLIBS = iupole iupfiledlg
+ endif
+ 
+-TARGETS := iup iupcd iupcontrols iupgl iupglcontrols iup_plot iup_mglplot iup_scintilla iupim iupimglib $(WINLIBS) iupweb iuptuio ledc iupview iupvled iuplua5 iupluaconsole iupluascripter
++TARGETS := iup iupcd iupcontrols iupgl iupglcontrols iup_plot iup_mglplot iup_scintilla iupim iupimglib $(WINLIBS) iuptuio ledc iupview 
+ TARGETS := $(filter-out $(EXCLUDE_TARGETS), $(TARGETS))
+ OTHERDEPENDENCIES := iupgtk iupmot
+ 
+diff --git a/tecmake.mak b/tecmake.mak
+index b8330ef..5271368 100755
+--- a/tecmake.mak
++++ b/tecmake.mak
+@@ -1212,6 +1212,9 @@ ifdef USE_CD
+   ifneq ($(findstring Linux5, $(TEC_UNAME)), )
+     LIBS += fontconfig
+   endif
++  ifneq ($(findstring Linux6, $(TEC_UNAME)), )
++    LIBS += fontconfig
++  endif
+   ifneq ($(findstring cygw, $(TEC_UNAME)), )
+     LIBS += fontconfig
+   endif
+@@ -1825,7 +1828,7 @@ depend: $(DEPEND)
+ $(DEPEND): $(MAKENAME) $(DEPENDDIR)
+   ifdef SRC
+ 	  @echo "" > $(DEPEND)
+-	  @which $(CPPC) 2> /dev/null 1>&2 ;\
++	  @true ;\
+ 	  if [ $$? -eq 0 ]; then \
+ 	    echo "Tecmake: Building Dependencies ... [ $(DEPEND) ] (can be slow)" ;\
+ 	    $(CPPC) $(DEPFLAGS) $(DEPINCS) $(STDINCS) $(PKGINCS) $(DEFINES) $(STDDEFS) -MM $(SOURCES) | \
